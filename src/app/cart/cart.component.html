@@ -1,0 +1,23 @@
+<h3>Cart</h3>
+<p>
+  <a routerLink="/shipping">Shipping Prices</a>
+</p>
+<div class="cart-item" *ngFor="let item of items">
+  <span>{{item.name}}</span>
+  <span>{{item.price | currency }}</span>
+<!--  &lt;!&ndash; Default format: output 'Jun 15, 2015'&ndash;&gt;-->
+<!--  <p>Today is {{today | date}}</p>-->
+
+<!--  &lt;!&ndash; fullDate format: output 'Monday, June 15, 2015'&ndash;&gt;-->
+<!--  <p>The date is {{today | date:'fullDate'}}</p>-->
+
+<!--  &lt;!&ndash; shortTime format: output '9:43 AM'&ndash;&gt;-->
+<!--  <p>The time is {{today | date:'shortTime'}}</p>-->
+
+
+</div>
+<app-checkout-form
+  [items]="items"
+  (summit)="clearCard()" >
+
+</app-checkout-form>

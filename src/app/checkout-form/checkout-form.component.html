@@ -1,0 +1,78 @@
+<!--<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">-->
+<!--  <div>-->
+<!--    <label for="name">-->
+<!--      Name-->
+<!--    </label>-->
+<!--    <input id="name" type="text" formControlName="name">-->
+<!--  </div>-->
+
+<!--  <div>-->
+<!--    <label for="address">-->
+<!--      Address-->
+<!--    </label>-->
+<!--    <input id="address" type="text" formControlName="address">-->
+<!--  </div>-->
+
+<!--  <button class="button" type="submit">Purchase</button>-->
+
+<!--</form>-->
+
+<div [hidden]="submitted">
+  <h1>Hero Form</h1>
+  <form (ngSubmit)="onSubmit(checkoutForm.value);summit.emit();" #checkoutForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required
+             [(ngModel)]="customer.name" name="name"
+             #name="ngModel">
+      <div [hidden]="name.valid "
+           class="alert alert-danger">
+        Name is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="text" class="form-control" id="phone" required
+             [(ngModel)]="customer.phone" name="phone"
+             #phone="ngModel">
+      <div [hidden]="phone.valid "
+           class="alert alert-danger">
+        Phone is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="paymentMethod">Payment Method</label>
+      <select class="form-control" id="paymentMethod" required
+              [(ngModel)]="customer.paymentMethod" name="paymentMethod"
+              #paymentMethod="ngModel">
+        <option *ngFor="let pm of paymentMethods" [value]="pm">{{pm}}</option>
+      </select>
+      <div [hidden]="paymentMethod.valid" class="alert alert-danger">
+        Payment Method is required
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!checkoutForm.form.valid">Submit</button>
+    <button type="button" class="btn btn-default" (click)="clear(); checkoutForm.reset()">Clear</button>
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h2>You submitted the following:</h2>
+  <div class="row">
+    <div class="col-xs-3">Name</div>
+    <div class="col-xs-9">{{ customer.name }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Phone</div>
+    <div class="col-xs-9">{{ customer.phone }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Payment Method</div>
+    <div class="col-xs-9">{{ customer.paymentMethod }}</div>
+  </div>
+  <br>
+  <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+</div>
